@@ -1,10 +1,17 @@
-/**/
-/*Gobinda Nandi 2017, https://stackoverflow.com/users/7991798/gobinda-nandi?tab=profile*/
+/*	
+ *
+ * This file is created to ease your form validation, feel free use this
+ * if you want to contribute, please fork in github link (https://github.com/inandi/jQuery-form-validator)
+ * Author : Gobinda Nandi 2017, https://stackoverflow.com/users/7991798/gobinda-nandi?tab=profile
+ *
+ * HAPPY CODING !!!
+ *
+ */
 
-var input_email_flag = false;
+var inputGbnEmailFlag = false;
 
-/* use gob_cur_year to get current year */
-var gob_cur_year = new Date().getFullYear();
+/* use gbnCurrentYear to get current year */
+var gbnCurrentYear = new Date().getFullYear();
 
 /*ten digit mobile no*/
 $('.input-gbn-mobile-ten').keypress(function (event) {
@@ -68,25 +75,6 @@ $('.input-gbn-alpha').keypress(function (e) {
 	return false;
 }).on('paste',function(e){  
 	var regex = new RegExp("^[a-zA-Z]+$");
-	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-	if (regex.test(str)) {
-		return true;
-	}
-	e.preventDefault();
-	return false;
-});
-
-/* only alphanumeric  and -_ */
-$('.input-gbn-slug').keypress(function (e) {
-	var regex = new RegExp("^[a-zA-Z-_]+$");
-	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-	if (regex.test(str)) {
-		return true;
-	}
-	e.preventDefault();
-	return false;
-}).on('paste',function(e){  
-	var regex = new RegExp("^[a-zA-Z-_]+$");
 	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
 	if (regex.test(str)) {
 		return true;
@@ -185,30 +173,25 @@ $('.input-gbn-sentence').keyup(function(e) {
 	$(this).val((vfinal));
 });
 
-function ucwords (str) {
+function ucWordsGBN (str) {
 	return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
 		return $1.toUpperCase();
 	});
 }
 
 /*Each first letter capital*/
-$('.input-gbn-each-cap').keypress(function (e)  {
-
-	var str = $(this).val();
-	ucwords(str);
-	// str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-	// 	// return letter.toUpperCase();
-	// 	$(this).val(letter.toUpperCase());
-	// });
-	alert(str);
-
-	// $(this).val($(this).val().toUpperCase());
-
+$('.input-gbn-each-cap').keyup(function (e)  {
+	let str = $(this).val();
+	$(this).val(ucWordsGBN(str));
+}).on('paste',function(e){ 
+	let str = $(this).val();
+	$(this).val(ucWordsGBN(str));
 });
 
 /*count character*/
 $('.input-gbn-count_char').change(function() {
-
+	let len = $(this).val().length;
+	$(this).attr('gbn-char-count', len);
 });
 
 /*alpha-nemuric only no space allowed*/
